@@ -69,7 +69,7 @@ def listado_alias(request):
             
             
     else:
-        ralias_encontrados = Alias.objects.all()
+        alias_encontrados = Alias.objects.all()
    
     formulario = AliasBusquedaFormulario()
     return render(request, r'inicio/listado_alias.html', {'formulario' : formulario, 'alias_encontrados': alias_encontrados})
