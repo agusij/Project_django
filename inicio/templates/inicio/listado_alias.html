@@ -1,0 +1,32 @@
+{% extends "compartidos/base.html" %} 
+
+{% block head %}
+<title>Alias</title>
+{% endblock head %}
+
+
+{% block h1_header %}
+Alias
+{% endblock h1_header %}
+
+
+{% block main %}
+
+<form action="">
+    
+    {{formulario}}
+    
+    
+    <input type="submit" value="Search" />
+</form>
+
+<ul>
+
+    {% for alias in alias_encontrados %}
+        <li>{{alias}}</li>
+
+    {% endfor %}
+
+</ul>
+
+{% endblock main %}

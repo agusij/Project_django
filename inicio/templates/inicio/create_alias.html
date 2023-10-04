@@ -12,11 +12,16 @@ Create Alias
 
 {% block main %}
 
-<form action="">
+<form action="" method="post">
+    {% csrf_token %}
+    {% comment %} <p>Nuevo_Alias: <input type="text" name="alias" /></p>
+    <p>Followers: <input type="number" name="followers" /></p> {% endcomment %}
+    {% comment %} <button>Create</button> {% endcomment %}
 
-    <p>Alias: <input type="text" /></p>
-    <p>Followers: <input type="text" /></p>
-    <button>Create</button>
+    <table>
+    {{formulario}}
+    </table>
+    
     <input type="submit" value="Create" />
 </form>
 
