@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.template import Template, Context, loader
 from django.http import HttpResponse
 from datetime import datetime
-from inicio.models import UserProfile
+from inicio.models import Alias
 
 # Create your views here.
 
@@ -33,9 +33,17 @@ def inicio (request):
     return render(request, r'inicio/inicio.html', datos)
 
 
-def create_alias(request, alias , followers):
+# def create_alias(request, alias , followers):
    
-   alias = UserProfile(alias=alias , followers=followers)
-   alias.save()
+#    alias = Alias(alias=alias , followers=followers)
+#    alias.save()
    
-   return render(request, r'inicio/new_alias.html', {})
+#    return render(request, r'inicio/new_alias.html', {})
+
+
+def create_alias(request):
+   
+#    alias = Alias(alias=alias , followers=followers)
+#    alias.save()
+   
+   return render(request, r'inicio/create_alias.html', {})
