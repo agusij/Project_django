@@ -21,12 +21,11 @@ Alias
 </form>
 
 <ul>
-
     {% for alias in alias_encontrados %}
-        <li>{{alias}}</li>
-
+        <li>{{ alias }}</li>
+    {% empty %}
+        <li>No se ha encontrado ningún contenido.</li>
     {% endfor %}
-
 </ul>
 
 {% endblock main %}

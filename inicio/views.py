@@ -14,32 +14,10 @@ def inicio (request):
         
     }
     
-    #V1
-    # archivo = open(r'inicio/templates/inicio/inicio.html', 'r')
-    # template = Template(archivo.read())
-    # contexto = Context(datos)
-    # template_renderizado = template.render(contexto)
-    # return HttpResponse(template_renderizado)
-
-
-
- #V2
-    # template = loader.get_template(r'inicio/inicio.html')
-    # template_renderizado = template.render(datos)
-    # return HttpResponse(template_renderizado)
-
-
-## v3
+  
 
     return render(request, r'inicio/inicio.html', datos)
 
-
-# def create_alias(request, alias , followers):
-   
-#    alias = Alias(alias=alias , followers=followers)
-#    alias.save()
-   
-#    return render(request, r'inicio/new_alias.html', {})
 
 
 def create_alias(request):
@@ -59,17 +37,30 @@ def create_alias(request):
 
 
 
-def listado_alias(request):
+# def listado_alias(request):
     
-    formulario = AliasBusquedaFormulario(request.GET)
-    if formulario.is_valid():
-            alias_a_buscar = formulario.cleaned_data.get('alias')
-            alias_encontrados = Alias.objects.filter(alias__icontains=alias_a_buscar)
+#     formulario = AliasBusquedaFormulario(request.GET)
+#     if formulario.is_valid():
+#             alias_a_buscar = formulario.cleaned_data.get('alias')
+#             alias_encontrados = Alias.objects.filter(alias__icontains=alias_a_buscar)
             
             
             
-    else:
-        alias_encontrados = Alias.objects.all()
+#     else:
+#         alias_encontrados = Alias.objects.all()
    
-    formulario = AliasBusquedaFormulario()
-    return render(request, r'inicio/listado_alias.html', {'formulario' : formulario, 'alias_encontrados': alias_encontrados})
+#     formulario = AliasBusquedaFormulario()
+#     return render(request, r'inicio/listado_alias.html', {'formulario' : formulario, 'alias_encontrados': alias_encontrados})
+
+
+def listado_alias(request):
+    if request.method == 'GET' and 'alias' in request.GET:
+        form = AliasBusquedaFormulario(request.GET)
+        if form.is_valid():
+            alias_encontrados = Alias.objects.filter(alias__icontains=form.cleaned_data['alias'])
+        else:
+            alias_encontrados = []
+    else:
+        form = AliasBusquedaFormulario()
+        alias_encontrados = Alias.objects.all()
+    return render(request, r'inicio/listado_alias.html' , {'formulario': form, 'alias_encontrados': alias_encontrados})

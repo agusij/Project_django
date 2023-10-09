@@ -12,7 +12,7 @@ class Alias(models.Model):
     
 class Tweet(models.Model):
     content = models.TextField(max_length=140)
-    createt_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
     # def __str__(self):
