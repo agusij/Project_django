@@ -10917,3 +10917,36 @@ footer.footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
+
+/* Estilo básico para cada tweet */
+.tweet-card {
+  border: 1px solid #e1e1e1;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.tweet-content {
+  margin-bottom: 10px;
+}
+
+.tweet-timestamp {
+  color: #aaa;
+  font-size: 12px;
+}
+
+.mi-clase-css {
+  border: 2px solid #007BFF; 
+  border-radius: 5px; 
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  width: 100%;  
+  box-sizing: border-box;  
+  transition: border-color 0.3s ease;  
+}
+
+.mi-clase-css:focus {
+  border-color: #0056b3;  
+  outline: none;  
+}

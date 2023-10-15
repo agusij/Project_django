@@ -1,0 +1,21 @@
+{% extends "compartidos/base.html" %}
+
+{% block head %}
+<title>Mostrar Tweets</title>
+{% endblock head %}
+
+{% block h1_header %}
+Todos los Tweets
+{% endblock h1_header %}
+
+{% block main %}
+<div class="tweet-list">
+    {% for tweet in tweets %}
+        <div class="tweet-card">
+            <p class="tweet-content">{{ tweet.content }}</p>
+            <p class="tweet-author">por {{ tweet.author.alias }}</p>
+            <p class="tweet-timestamp">{{ tweet.created_at }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock main %}

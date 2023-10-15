@@ -12,6 +12,8 @@ Alias
 
 {% block main %}
 
+<a class="navbar-brand" href={% url "create_alias" %}>Crear Alias</a>
+
 <form action="">
     
     {{formulario}}
@@ -22,7 +24,11 @@ Alias
 
 <ul>
     {% for alias in alias_encontrados %}
-        <li>{{ alias }}</li>
+        <li>
+
+            <a href={% url "detalle_alias" alias.id %}>{{ alias }} </a>|| <a href={% url "edit_alias" alias.id %}>Edit</a> || <a href={% url "delete_alias" alias.id %}>Delete</a>
+        
+        </li>
     {% empty %}
         <li>No se ha encontrado ningún contenido.</li>
     {% endfor %}

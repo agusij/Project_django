@@ -1,0 +1,23 @@
+{% extends "compartidos/base.html" %}
+
+{% block head %}
+<title>Crear Tweet</title>
+{% endblock head %}
+
+{% block h1_header %}
+Create Tweet
+{% endblock h1_header %}
+
+
+{% block main %}
+<form method="post">
+    {% csrf_token %}
+
+    <table>
+    {{ form.as_p }}
+    </table>
+
+    <button type="submit">Tweet</button>
+    
+</form>
+{% endblock main %}
