@@ -10,7 +10,7 @@
 
 {% block main %}
 
-<form action={% url "edit_profile" %} method="post">
+<form action={% url "edit_profile" %} method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     <table>

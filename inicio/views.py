@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from datetime import datetime
 from inicio.models import Alias
 from inicio.forms import AliasFormulario, AliasBusquedaFormulario, CrearAliasForlmulario, EditarAliasForlmulario
+from django.contrib.auth.decorators import login_required
 from .forms import TweetForm
 from .models import Tweet
 
@@ -58,7 +59,7 @@ def create_alias(request):
 #     formulario = AliasBusquedaFormulario()
 #     return render(request, r'inicio/listado_alias.html', {'formulario' : formulario, 'alias_encontrados': alias_encontrados})
 
-
+@login_required
 def edit_alias(request, alias_id):
     alias_a_editar = Alias.objects.get(id=alias_id)
     
@@ -90,7 +91,7 @@ def listado_alias(request):
         alias_encontrados = Alias.objects.all()
     return render(request, r'inicio/listado_alias.html' , {'formulario': form, 'alias_encontrados': alias_encontrados})
 
-
+@login_required
 def delete_alias(request, alias_id):
     alias_a_aliminar = Alias.objects.get(id=alias_id)
     alias_a_aliminar.delete()

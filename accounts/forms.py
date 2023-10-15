@@ -18,10 +18,12 @@ class MyOwnEditProfileForm(UserChangeForm):
     email = forms.EmailField(label='New email')
     first_name = forms.CharField(label= 'New name', max_length=30)
     last_name = forms.CharField(label= 'New surname', max_length=50)
+    link = forms.URLField(required=False)
+    avatar = forms.ImageField(required=False)
     
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name']
+        fields = ['email', 'first_name', 'last_name' , 'link']
         
     
 class PersonalChangeForm(PasswordChangeForm):

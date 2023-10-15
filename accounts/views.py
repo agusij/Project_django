@@ -4,6 +4,9 @@ from django.contrib.auth import authenticate, login as django_login
 from accounts.forms import PersonalProfile, MyOwnEditProfileForm, PersonalChangeForm
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from accounts.models import ExtraInfo
 
 def login(request):
     
@@ -17,6 +20,8 @@ def login(request):
             usuario = authenticate(username=username , password=password)
             
             django_login(request, usuario)
+            
+            ExtraInfo.objects.get_or_create(user=usuario)
             
             return redirect('inicio')
         
@@ -39,22 +44,31 @@ def register(request):
             formulario = PersonalProfile()
     return render(request, 'accounts/register.html', {'formulario': formulario})
 
-
+@login_required
 def edit_profile(request):
     
+    extra_info = request.user.extrainfo
+    
     if request.method =='POST':
-        formulario = MyOwnEditProfileForm(request.POST , instance=request.user)
+        formulario = MyOwnEditProfileForm(request.POST ,request.FILES, instance=request.user)
         if formulario.is_valid():
+            
+            extra_info.link = formulario.cleaned_data.get('link')
+            if formulario.cleaned_data.get('avatar'):
+                extra_info.avatar = formulario.cleaned_data.get('avatar')
+            
+            extra_info.save()
+            
             formulario.save()
             return redirect('inicio') #mandar al perfil cuando se cree
         
     else:
     
-     formulario= MyOwnEditProfileForm(instance=request.user)
+     formulario= MyOwnEditProfileForm(initial={'link': extra_info.link, 'avatar': extra_info.avatar} ,instance=request.user)
     return render(request, 'accounts/edit_profile.html', {'formulario': formulario})
 
 
-class ChangePassword(PasswordChangeView):
+class ChangePassword(LoginRequiredMixin, PasswordChangeView):
     template_name = 'accounts/edit_pass.html'
     form_class = PersonalChangeForm
     success_url = reverse_lazy('edit_profile')

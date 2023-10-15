@@ -26,6 +26,9 @@
                 <a class="navbar-brand" href={% url "alias" %}>Alias</a>
                 <a class="navbar-brand" href={% url "create_tweet" %}>Tweet</a>
                 {% if  request.user.is_authenticated %}
+                {% if request.user.extrainfo.avatar %}
+                    <img src={{request.user.extrainfo.avatar.url}} alt="" height="35px">
+                {% endif %}
                 <a class="navbar-brand" href={% url "edit_profile" %}>{{request.user.username}}</a>
                 <a class="btn btn-primary" href={% url "logout" %}>Sign out</a>
                 {% else %}
