@@ -6,6 +6,7 @@ from ckeditor.fields import RichTextField
 class Tweet(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = RichTextField(blank=True, null=True, max_length=280)
+    image = models.ImageField(upload_to='tweets/images/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

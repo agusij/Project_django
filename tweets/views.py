@@ -14,7 +14,7 @@ class TweetListView(ListView):
 
 class TweetCreateView(LoginRequiredMixin, CreateView):
     model = Tweet
-    fields = ['content']
+    fields = ['content', 'image']
     template_name = 'tweets/tweet_form.html'
     success_url = reverse_lazy('tweet_list')
 

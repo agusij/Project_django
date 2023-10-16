@@ -23,10 +23,10 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href={% url "inicio" %}>Inicio</a>
-                <a class="navbar-brand" href={% url "about_me" %}>Sobre mí</a>
                 <a class="navbar-brand" href={% url "alias" %}>Alias</a>
                 <a class="navbar-brand" href={% url "tweet_list" %}>Tweets</a>
                 <a class="navbar-brand" href={% url "tweet_create" %}>New Tweet</a>
+                <a class="navbar-brand" href={% url "about_me" %}>Sobre mí</a>
                 {% if  request.user.is_authenticated %}
                 {% if request.user.extrainfo.avatar %}
                     <img src={{request.user.extrainfo.avatar.url}} alt="" height="35px">

@@ -1,11 +1,29 @@
 {% extends "compartidos/base.html" %}
 
+{% block head %}
+    <title>Tweets</title>
+{% endblock head %}
+
+{% block h1_header %}
+Aquí encontraras la actividad de nuestra comunidad!
+{% endblock h1_header %}
+
+
 {% block main %}
-    <h2>All Tweets</h2>
+
+
+    <h2>Listado de Tweets</h2>
     {% for tweet in tweets %}
         <div class="tweet">
             <strong>{{ tweet.user.username }}</strong>
             <p>{{ tweet.content|safe }}</p>
+            
+            {% if tweet.image %}
+                <div class="tweet-image">
+                    <img src="{{ tweet.image.url }}" alt="Image for {{ tweet.content|slice:':30' }}" width="200">
+                </div>
+            {% endif %}
+            
             <small>{{ tweet.created_at }}</small>
             
             {% if request.user == tweet.user %}
@@ -14,7 +32,6 @@
                 <a href="{% url 'tweet_delete' tweet.pk %}">Delete</a>
             </div>
             {% endif %}
-            
         </div>
     {% endfor %}
 {% endblock main %}
