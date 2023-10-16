@@ -10950,3 +10950,16 @@ footer.footer {
   border-color: #0056b3;  
   outline: none;  
 }
+
+.profile-avatar {
+  width: 100px;        
+  height: 100px;       
+  border-radius: 50%;  
+  object-fit: cover;   
+}
+
+.avatar-wrapper {
+  display: flex;
+  align-items: center;  
+  gap: 10px;            
+}

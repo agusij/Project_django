@@ -60,7 +60,7 @@ def edit_profile(request):
             extra_info.save()
             
             formulario.save()
-            return redirect('inicio') #mandar al perfil cuando se cree
+            return redirect('profile') #mandar al perfil cuando se cree
         
     else:
     
@@ -72,3 +72,16 @@ class ChangePassword(LoginRequiredMixin, PasswordChangeView):
     template_name = 'accounts/edit_pass.html'
     form_class = PersonalChangeForm
     success_url = reverse_lazy('edit_profile')
+    
+@login_required    
+def profile(request):
+    user = request.user
+    extra_info, created  = ExtraInfo.objects.get_or_create(user=user)
+    
+    context = {
+       'user': user,
+       'extra_info': extra_info 
+        
+    }
+    
+    return render(request, 'accounts/profile.html', context)

@@ -1,0 +1,31 @@
+{% extends "compartidos/base.html" %} 
+
+
+{% block head %}
+<title>Profile</title>
+{% endblock head %}
+
+{% block h1_header %}Profile of {{ user.username }}{% endblock h1_header %}
+
+{% block main %}
+<p><strong>Username:</strong> {{ user.username }}</p>
+<p><strong>Email:</strong> {{ user.email }}</p>
+<p><strong>First Name:</strong> {{ user.first_name }}</p>
+<p><strong>Last Name:</strong> {{ user.last_name }}</p>
+<p><strong>Link:</strong> <a href="{{ extra_info.link }}">{{ extra_info.link }}</a></p>
+
+{% if request.user.extrainfo.avatar %}
+<p class="avatar-wrapper">
+    <strong>Avatar:</strong>
+    <section class="testimonials text-center bg-light">
+        <div class="container"> 
+            <div class="col-lg-12">
+                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                    <img class="img-fluid rounded-circle mb-3" src="{{ extra_info.avatar.url }}" alt="{{ user.username }}'s avatar" class="profile-avatar">
+                </div>
+            </div>
+        </div>
+    </section>  
+</p>
+{% endif %}
+{% endblock main %}

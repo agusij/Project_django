@@ -1,34 +1,5 @@
 {% extends "compartidos/base.html" %}
 
-{% comment %} {% extends "compartidos/base.html" %} 
-
-{% block head %}
-<title>Inicio</title>
-{% endblock head %}
-
-
-{% block h1_header %}
-Bienvenidos a mi pagina!!!
-{% endblock h1_header %} {% endcomment %}
-
-
-
-{% comment %} {% block main %}
-<div class="tweets-container">
-    {% for tweet in tweets %}
-    <div class="tweet-card">
-        <div class="tweet-content">{{ tweet.content }}</div>
-        <div class="tweet-info">
-            <span class="tweet-date">{{ tweet.created_at|date:"F j, Y" }}</span>
-        </div>
-    </div>
-    {% empty %}
-    <p>No hay tweets para mostrar.</p>
-    {% endfor %}
-</div>
-{% endblock %} {% endcomment %}
-
-
 {% block head %}
 <title>Inicio</title>
 {% endblock head %}
@@ -38,12 +9,5 @@ Bienvenidos a mi pagina!!!
 {% endblock h1_header %}
 
 {% block main %}
-<ul>
-    {% for tweet in tweets %}
-        <li>
-            <strong>{{ tweet.author.alias }}</strong>: {{ tweet.content }}
-            <small>{{ tweet.created_at }}</small>
-        </li>
-    {% endfor %}
-</ul>
+
 {% endblock main %}

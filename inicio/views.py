@@ -5,28 +5,22 @@ from datetime import datetime
 from inicio.models import Alias
 from inicio.forms import AliasFormulario, AliasBusquedaFormulario, CrearAliasForlmulario, EditarAliasForlmulario
 from django.contrib.auth.decorators import login_required
-from .forms import TweetForm
-from .models import Tweet
 
 
-# Create your views here.
 
-# def inicio (request):
+
+
+def inicio (request):
     
-#     datos = {
-#         'fecha': datetime.now()
+    datos = {
+        'fecha': datetime.now()
         
-#     }
+    }
     
   
 
-#     return render(request, r'inicio/inicio.html', datos)
+    return render(request, r'inicio/inicio.html', datos)
 
-
-
-def inicio(request):
-    tweets = Tweet.objects.all().order_by('-created_at')
-    return render(request, 'inicio/inicio.html', {'tweets': tweets})
 
 
 
@@ -48,16 +42,6 @@ def create_alias(request):
 
 
 
-# def listado_alias(request):
-    
-#     formulario = AliasBusquedaFormulario(request.GET)
-#     if formulario.is_valid():
-#             alias_a_buscar = formulario.cleaned_data.get('alias')
-#             alias_encontrados = Alias.objects.filter(alias__icontains=alias_a_buscar)           
-#     else:
-#         alias_encontrados = Alias.objects.all()
-#     formulario = AliasBusquedaFormulario()
-#     return render(request, r'inicio/listado_alias.html', {'formulario' : formulario, 'alias_encontrados': alias_encontrados})
 
 @login_required
 def edit_alias(request, alias_id):
@@ -104,28 +88,5 @@ def detalle_alias(request, alias_id):
     return render(request, 'inicio/detalle_alias.html' , {'alias' : alias})
 
 
-
-    
-    
-
-
-
-def create_tweet(request):
-    if request.method == 'POST':
-        form = TweetForm(request.POST)
-        if form.is_valid():
-            tweet = form.save(commit=False)
-            tweet.author = Alias.objects.first()  # TODO: Cambiar por el autor actual
-            tweet.save()
-            return redirect('mostrar_tweets') # Cambiar nombre
-    else:
-        form = TweetForm()
-    return render(request, r'inicio/create_tweet.html', {'form': form})
-
-
-
-
-def mostrar_tweets(request):
-    tweets = Tweet.objects.all().order_by('-created_at')  # Obtiene todos los tweets y los ordena por fecha de creación en orden descendente
-    context = {'tweets': tweets}
-    return render(request, 'inicio/mostrar_tweets.html', context)
+def about_me(request):
+    return render(request, 'inicio/about_me.html')

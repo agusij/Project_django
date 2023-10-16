@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "inicio",
     "accounts",
-    "ckeditor"
+    "ckeditor",
+    "tweets"
 ]
 
 MIDDLEWARE = [
