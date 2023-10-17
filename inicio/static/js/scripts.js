@@ -5,3 +5,14 @@
 */
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
+$(document).ready(function() {
+    $('.like-button').click(function(event) {
+        event.preventDefault();
+        const url = $(this).attr('href');
+
+        $.post(url, function(data) {
+            const likesCount = data.likes_count;
+            $(event.target).next().text(likesCount + " likes");
+        });
+    });
+});

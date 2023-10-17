@@ -1,6 +1,7 @@
 {% extends "compartidos/base.html" %}
 
 {% block head %}
+
     <title>Tweets</title>
 {% endblock head %}
 
@@ -23,7 +24,13 @@ Aquí encontraras la actividad de nuestra comunidad!
                     <img src="{{ tweet.image.url }}" alt="Image for {{ tweet.content|slice:':30' }}" width="200">
                 </div>
             {% endif %}
-            
+            <div class="tweet-likes">
+                <form action="{% url 'like_tweet' tweet.pk %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="like-button">Like</button>
+                </form>
+                {{ tweet.likers.count }} likes
+            </div>
             <small>{{ tweet.created_at }}</small>
             
             {% if request.user == tweet.user %}

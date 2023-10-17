@@ -1,0 +1,17 @@
+{% extends "compartidos/base.html" %}
+
+{% block main %}
+    <h2>Resultados de búsqueda para: {{ request.GET.query }}</h2>
+
+    {% if tweets %}
+        {% for tweet in tweets %}
+            <div class="tweet">
+                <strong>{{ tweet.user.username }}</strong>
+                <p>{{ tweet.content|safe }}</p>
+                <small>{{ tweet.created_at }}</small>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No se encontraron tweets que coincidan con tu búsqueda.</p>
+    {% endif %}
+{% endblock main %}
