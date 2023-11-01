@@ -8,6 +8,7 @@
 {% block h1_header %}Profile of {{ user.username }}{% endblock h1_header %}
 
 {% block main %}
+<a href="{% url 'edit_profile' %}" class="btn btn-primary mt-3">Edit Profile</a>
 <p><strong>Username:</strong> {{ user.username }}</p>
 <p><strong>Email:</strong> {{ user.email }}</p>
 <p><strong>First Name:</strong> {{ user.first_name }}</p>
@@ -28,4 +29,5 @@
     </section>  
 </p>
 {% endif %}
+
 {% endblock main %}

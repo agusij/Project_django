@@ -35,7 +35,7 @@
                 {% if request.user.extrainfo.avatar %}
                     <img src={{request.user.extrainfo.avatar.url}} alt="" height="35px">
                 {% endif %}
-                <a class="navbar-brand" href={% url "edit_profile" %}>{{request.user.username}}</a>
+                <a class="navbar-brand" href={% url "profile" %}>{{request.user.username}}</a>
                 <a class="btn btn-primary" href={% url "logout" %}>Sign out</a>
                 {% else %}
                 <a class="btn btn-primary" href={% url "login" %}>Sign Up</a>
