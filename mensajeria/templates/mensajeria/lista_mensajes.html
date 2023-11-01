@@ -1,0 +1,30 @@
+{% extends "compartidos/base.html" %}
+
+{% block main %}
+    <h2>Mensajes Recibidos</h2>
+
+    {% if request.user.is_authenticated %}
+        <div class="mb-3">
+            <a class="btn btn-primary" href="{% url 'enviar_mensaje' %}">Enviar Nuevo Mensaje</a>
+        </div>
+    {% endif %}
+
+    <ul>
+    {% for mensaje in mensajes %}
+        <li>
+            <strong>De:</strong> {{ mensaje.remitente.username }}<br>
+            <strong>Fecha:</strong> {{ mensaje.fecha_envio }}<br>
+            <p>{{ mensaje.contenido }}</p>
+            {% if not mensaje.leido %}
+                <span style="color: red;">Nuevo</span>
+            {% endif %}
+            
+            
+            <form action="{% url 'eliminar_mensaje' mensaje.id %}" method="post" onsubmit="return confirm('¿Estás seguro de eliminar este mensaje?');">
+                {% csrf_token %}
+                <input type="submit" value="Eliminar" class="btn btn-danger">
+            </form>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

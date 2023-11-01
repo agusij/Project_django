@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     "inicio",
     "accounts",
     "ckeditor",
-    "tweets"
+    "tweets",
+    "mensajeria"
 ]
 
 MIDDLEWARE = [
