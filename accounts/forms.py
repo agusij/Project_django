@@ -23,7 +23,7 @@ class MyOwnEditProfileForm(UserChangeForm):
     
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name' , 'link']
+        fields = ['email', 'first_name', 'last_name' , 'link' , 'avatar']
         
     
 class PersonalChangeForm(PasswordChangeForm):

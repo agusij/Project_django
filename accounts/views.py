@@ -46,26 +46,25 @@ def register(request):
 
 @login_required
 def edit_profile(request):
-    
     extra_info = request.user.extrainfo
-    
-    if request.method =='POST':
-        formulario = MyOwnEditProfileForm(request.POST ,request.FILES, instance=request.user)
+    if request.method == 'POST':
+        formulario = MyOwnEditProfileForm(request.POST, request.FILES, instance=request.user)
         if formulario.is_valid():
+            user = formulario.save()
             
             extra_info.link = formulario.cleaned_data.get('link')
             if formulario.cleaned_data.get('avatar'):
                 extra_info.avatar = formulario.cleaned_data.get('avatar')
-            
             extra_info.save()
             
-            formulario.save()
-            return redirect('profile') #mandar al perfil cuando se cree
-        
+            return redirect('profile')
     else:
-    
-     formulario= MyOwnEditProfileForm(initial={'link': extra_info.link, 'avatar': extra_info.avatar} ,instance=request.user)
+        formulario = MyOwnEditProfileForm(
+            initial={'link': extra_info.link, 'avatar': extra_info.avatar},
+            instance=request.user
+        )
     return render(request, 'accounts/edit_profile.html', {'formulario': formulario})
+
 
 
 class ChangePassword(LoginRequiredMixin, PasswordChangeView):

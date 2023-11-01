@@ -1,5 +1,10 @@
 {% extends "compartidos/base.html" %}
 
+{% block head %}
+    {{ form.media }}  
+{% endblock head %}
+
+
 {% block main %}
     <h2>New Tweet</h2>
     <form method="post" enctype="multipart/form-data">

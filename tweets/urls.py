@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import TweetListView, TweetCreateView, TweetDeleteView, TweetUpdateView, TweetSearchView
+from .views import TweetListView, TweetCreateView, TweetDeleteView, TweetUpdateView, TweetSearchView, tweet_detail
 
 urlpatterns = [
     path('tweets/', TweetListView.as_view(), name='tweet_list'),
@@ -9,6 +9,8 @@ urlpatterns = [
     path('tweets/delete/<int:pk>/', TweetDeleteView.as_view(), name='tweet_delete'),
     path('tweet/<int:tweet_id>/like/', views.like_tweet, name='like_tweet'),
     path('tweet/<int:tweet_id>/unlike/', views.unlike_tweet, name='unlike_tweet'),
-    path('search/', TweetSearchView.as_view(), name='tweet_search'), 
+    path('search/', TweetSearchView.as_view(), name='tweet_search'),
+    path('tweet/<int:pk>/', views.tweet_detail, name='tweet_detail'),
+
 
 ]

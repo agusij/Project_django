@@ -1,0 +1,25 @@
+{% extends "compartidos/base.html" %}
+
+{% block head %}
+    <title>{{ tweet.user.username }}'s Tweet</title>
+{% endblock head %}
+
+{% block h1_header %}
+    Tweet by {{ tweet.user.username }}
+{% endblock h1_header %}
+
+{% block main %}
+    <div class="tweet-detail">
+        <p>{{ tweet.content|safe }}</p>
+
+        {% if tweet.image %}
+            <div class="tweet-image">
+                <img src="{{ tweet.image.url }}" alt="Image for {{ tweet.content|slice:':30' }}" width="200">
+            </div>
+        {% endif %}
+        <div class="tweet-likes">
+            {{ tweet.likers.count }} likes
+        </div>
+        <small>{{ tweet.created_at }}</small>
+    </div>
+{% endblock main %}

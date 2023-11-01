@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_list_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
@@ -8,7 +8,7 @@ from .forms import SearchForm
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 
 
 
@@ -69,7 +69,9 @@ def like_tweet(request, tweet_id):
     tweet = get_object_or_404(Tweet, id=tweet_id)
     if request.user not in tweet.likers.all():
         tweet.likers.add(request.user)
-    return JsonResponse({'likes_count': tweet.likers.count()})
+    # return JsonResponse({'likes_count': tweet.likers.count()})
+    return redirect('tweet_list') 
+
 
 
 
@@ -80,3 +82,7 @@ def unlike_tweet(request, tweet_id):
     if request.user in tweet.likers.all():
         tweet.likers.remove(request.user)
     return JsonResponse({'likes_count': tweet.likers.count()})
+
+def tweet_detail(request, pk):
+    tweet = get_object_or_404(Tweet, pk=pk)
+    return render(request, 'tweets/tweet_detail.html', {'tweet': tweet})
